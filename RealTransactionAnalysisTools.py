@@ -17,7 +17,7 @@ try:
     from PyQt5.QtWidgets import *
     from PyQt5 import uic, QtGui
 except ImportError:
-    print("PyQt 패키지를 설치합니다.")
+    print("Installing PyQt")
     install('PyQt5')
     from PyQt5.QtWidgets import *
     from PyQt5 import uic, QtGui
@@ -25,21 +25,21 @@ except ImportError:
 try:
     import win32com.client
 except ImportError:
-    print("PyWin32 패키지를 설치합니다.")
+    print("Installing PyWin32")
     install('pywin32')
     import win32com.client
 
 try:
     import pandas as pd
 except ImportError:
-    print("Pandas 패키지를 설치합니다.")
+    print("Installing Pandas")
     install('pandas')
     import pandas as pd
 
 try:
     import numpy as np
 except ImportError:
-    print("NumPy 패키지를 설치합니다.")
+    print("Installing NumPy")
     install('numpy')
     import numpy as np
 
@@ -48,7 +48,7 @@ try:
     from statsmodels.formula.api import quantreg as qreg
     import statsmodels.api as sm
 except ImportError:
-    print("StatsModels 패키지를 설치합니다.")
+    print("Installing StatsModels")
     install('statsmodels')
     from statsmodels.formula.api import ols
     from statsmodels.formula.api import quantreg as qreg
@@ -57,7 +57,7 @@ except ImportError:
 try:
     import patsy
 except ImportError:
-    print("patsy 패키지를 설치합니다.")
+    print("Installing Patsy")
     install('patsy')
     import patsy
 
@@ -67,34 +67,34 @@ app_ver = 191227
 
 class Window(QMainWindow, form_class):
     def __init__(self):
-        # form_class 상속
+        # form_class inheriance
         super().__init__()
         self.setupUi(self)
 
-        # UI 디자인
+        # Qt GUI Design
         stylesheet = """ QTabWidget>QWidget>QWidget{background: #f0f0f0;} """
         self.setStyleSheet(stylesheet)
         self.setWindowIcon(QtGui.QIcon("gui/icon.png"))
 
-        ''' 메인화면 '''
-        # 탭 연결
+        ''' Main Screen '''
+        # Tab Connection
         self.Main_Connect1.clicked.connect(self.connect_tab1)
         self.Main_Connect2.clicked.connect(self.connect_tab2)
         self.Main_Connect3.clicked.connect(self.connect_tab3)
         self.Main_Connect4.clicked.connect(self.connect_tab4)
 
-        # 이미지 삽입
+        # Main Logo
         self.Main_logo.setPixmap(QtGui.QPixmap("gui/logo_small.png"))
 
-        ''' Rawdata 업데이터 '''
-        # 변수 초기화
+        ''' Rawdata Updater '''
+        # Variable Initialization
         self.RU_path1 = None
         self.RU_path2 = None
         self.RU_data1 = None
         self.RU_data2 = None
         self.RU_append_data = None
 
-        # 이벤트 관리
+        # Event Connection
         self.RU_button_open1.clicked.connect(self.ru_open1)
         self.RU_button_open2.clicked.connect(self.ru_open2)
         self.RU_button_import1.clicked.connect(self.ru_import1)
@@ -102,8 +102,8 @@ class Window(QMainWindow, form_class):
         self.RU_button_append.clicked.connect(self.ru_append)
         self.RU_button_save.clicked.connect(self.ru_save)
 
-        ''' 데이터 프로세서 '''
-        # 변수 초기화
+        ''' Data Processor '''
+        # Variable Initialization
         self.DP_path_rawdata = None
         self.DP_path_key = None
         self.DP_path_dongcode = None
@@ -116,7 +116,7 @@ class Window(QMainWindow, form_class):
         self.DP_wb = None
         self.DP_ws = None
 
-        # 이벤트 관리
+        # Event Connection
         self.DP_button_open_rawdata.clicked.connect(self.dp_open_rawdata)
         self.DP_button_open_key.clicked.connect(self.dp_open_key)
         self.DP_button_open_dongcode.clicked.connect(self.dp_open_dongcode)
@@ -129,8 +129,8 @@ class Window(QMainWindow, form_class):
         self.DP_button_viewdata.clicked.connect(self.dp_view_data)
         self.DP_button_save.clicked.connect(self.dp_save)
 
-        ''' 피벗 테이블 메이커'''
-        # 변수 초기화
+        ''' Pivot Table Maker '''
+        # Variable Initialization
         self.PTM_path = None
         self.PTM_data = None
         self.PTM_column_list = None
@@ -140,7 +140,7 @@ class Window(QMainWindow, form_class):
         self.PTM_pivot_wb = None
         self.PTM_pivot_ws = None
 
-        # 이벤트 관리
+        # Event Connection
         self.PTM_button_open.clicked.connect(self.ptm_open_file)
         self.PTM_button_import.clicked.connect(self.ptm_import_file)
         self.PTM_button_analyze.clicked.connect(self.ptm_analysis)
@@ -148,26 +148,26 @@ class Window(QMainWindow, form_class):
         self.PTM_button_viewraw.clicked.connect(self.view_rawdata)
         self.PTM_button_viewpivot.clicked.connect(self.view_pivot)
 
-        ''' 회귀분석'''
-        # 변수 초기화
+        ''' Regression '''
+        # Variable Initialization
         self.reg_path = None
         self.reg_data = None
         self.reg_column_list = None
         self.reg_frame = None
 
-        # 이벤트 관리
+        # Event Connection
         self.reg_button_open.clicked.connect(self.reg_open_file)
         self.reg_button_import.clicked.connect(self.reg_import_file)
         self.reg_button_analyze.clicked.connect(self.reg_analyze)
         self.reg_button_save.clicked.connect(self.reg_save)
 
-        ''' 메뉴 바 '''
+        ''' Menu Bar '''
         self.action_exit.triggered.connect(self.close_app)
         self.action_about.triggered.connect(self.about_app)
 
-    # 이하 Tab별 기능
+    # Function by Tabs from here
 
-    ''' 메인화면'''
+    ''' Main Screen '''
     def connect_tab1(self):
         QTabWidget.setCurrentIndex(self.tabWidget, 1)
 
@@ -180,7 +180,7 @@ class Window(QMainWindow, form_class):
     def connect_tab4(self):
         QTabWidget.setCurrentIndex(self.tabWidget, 4)
 
-    ''' Rawdata 업데이터 '''
+    ''' Rawdata Updater '''
     def ru_open1(self):
         ru_open_path1 = QFileDialog.getOpenFileName(self,
                                                     caption='Open Existing Rawdata',
@@ -273,7 +273,7 @@ class Window(QMainWindow, form_class):
                 self.RU_text_status.setText("Rawdata has been saved to the following location:\n"
                                             + str(ru_save_path[0]))
 
-    ''' 데이터 프로세서 '''
+    ''' Data Processor '''
     def dp_open_rawdata(self):
         dp_open_path = QFileDialog.getOpenFileName(self, caption='Open File', filter='CSV Files (*.csv)')
         if dp_open_path[0] == "":
@@ -366,7 +366,7 @@ class Window(QMainWindow, form_class):
     def dp_analysis(self):
         try:
 
-            ''' # 이 코드는 나중에 필요하면 추가
+            ''' # Temporary
             def sort_quarter(df, column_name):
                 january = df[df[column_name].astype(str).str[4:] == "01"]
                 february = df[df[column_name].astype(str).str[4:] == "02"]
@@ -483,7 +483,7 @@ class Window(QMainWindow, form_class):
                                             + str(DP_save_path[0]))
                 self.DP_data_edited = None
 
-    ''' 피벗 테이블 메이커 '''
+    ''' Pivot Table Maker '''
     def ptm_open_file(self):
         ptm_open_path = QFileDialog.getOpenFileName(self,
                                                     caption='Open File',
@@ -518,7 +518,7 @@ class Window(QMainWindow, form_class):
             column = str(self.PTM_combo_column.currentText())
             subject = str(self.PTM_combo_subject.currentText())
 
-            # 통계값 계산 및 Pivot Table 작성
+            # Calc Stats and Making Pivot Table
             if stats == "Mean":
                 self.PTM_pivot = pd.pivot_table(self.PTM_data, index=row, columns=column, aggfunc="mean")[subject]
             elif stats == "Median":
@@ -600,7 +600,7 @@ class Window(QMainWindow, form_class):
                 self.PTM_text_status.setText("Pivot table has been saved to the following location:\n"
                                              + str(ptm_save_path[0]))
 
-    ''' 회귀분석 '''
+    ''' Regression '''
     def reg_open_file(self):
         reg_open_path = QFileDialog.getOpenFileName(self,
                                                     caption='Open File',
@@ -659,7 +659,7 @@ class Window(QMainWindow, form_class):
                 time_length = len(times)
                 locations = self.reg_data[columns_name].drop_duplicates().sort_values()
 
-                # 서울시 전체 분석(areg)
+                # Seoul Total with areg
                 formula = "np.log(" + dep + ") ~ " + "C(" + time_dummy + ") " + " + C(" + indep_internal + ")"
                 model = areg(formula, data=self.reg_data, absorb=apt_dummy).fit()
                 self.reg_frame = pd.DataFrame(model.params, columns=["서울특별시_coef"]).ix[0:time_length + 4]
@@ -693,7 +693,7 @@ class Window(QMainWindow, form_class):
                 time_length = len(times)
                 locations = self.reg_data[columns_name].drop_duplicates()
 
-                # 서울시 전체 분석(areg)
+                # Seoul Total with areg
                 formula = "np.log(" + dep + ") ~ " + "C(" + time_dummy + ") " + " + C(" + indep_internal + ")"
                 model = areg(formula, data=self.reg_data, absorb=apt_dummy).fit()
                 self.reg_frame = pd.DataFrame(model.params, columns=["서울특별시_coef"]).ix[0:time_length + 4]
@@ -732,7 +732,7 @@ class Window(QMainWindow, form_class):
                                              + str(reg_save_path[0]))
                 self.reg_frame = None
 
-    ''' 메뉴 바 '''
+    ''' Menu Bar '''
     @staticmethod
     def close_app():
         app.exit()
