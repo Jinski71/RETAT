@@ -1,6 +1,6 @@
 ﻿"""
 
-REal Transaction Analysis Tools
+Real Estate Transaction Analysis Tools
 SNU 220-344
 
 """
