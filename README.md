@@ -1,6 +1,6 @@
 # RETAT: Real Estate Transaction Analysis Tools
 * Tools for Analysing Real Estate Transaction Data of South Korea
-* Made by Seoul National University Shared City Lab for research purposes
+* Made by Seoul National University SCLab for research purposes
 * It uses PyQt5 for GUI interface
 * It contains
    1. Data Updater (monthly)
